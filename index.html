@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #ffe6cc;
+      overflow: hidden;
+    }
+
+    #birthdayWish {
+      text-align: center;
+      font-family: 'Arial', sans-serif;
+      position: relative;
+      opacity: 0;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
+
+    #balloonContainer {
+      position: absolute;
+      bottom: 0;
+      animation: floatBalloon 5s ease-in-out forwards;
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    #balloon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #f15b4f;
+      margin: 10px;
+      animation: floatRandom 5s ease-in-out infinite;
+    }
+
+    #partyPoppers {
+      position: absolute;
+      animation: popPoppers 2s ease-in-out infinite;
+    }
+
+    .confetti {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 5px;
+      height: 10px;
+      background-color: #f15b4f;
+      animation: fall 2s linear;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes floatBalloon {
+      to {
+        transform: translateY(-50%);
+      }
+    }
+
+    @keyframes floatRandom {
+      to {
+        transform: translateY(calc(-50% + ${Math.random() * 100}%));
+      }
+    }
+
+    @keyframes popPoppers {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+    }
+
+    @keyframes fall {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(100vh);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="balloonContainer">
+    <div id="balloon">🎈</div>
+  </div>
+
+  <div id="birthdayWish">
+    <div class="confetti"></div>
+    <h1>Happy Birthday, John Smith!</h1>
+    <p>Wishing you a day filled with joy and laughter. 🎉</p>
+    <div id="partyPoppers"></div>
+    <div class="confetti"></div>
+  </div>
+
+  <script>
+    const confettiCount = 2000;
+    const colors = ['#f15b4f', '#f9c745', '#4361ee', '#99d9ea', '#ff9999'];
+
+    for (let i = 0; i < confettiCount; i++) {
+      const piece = document.createElement('div');
+      piece.classList.add('confetti-piece');
+      piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      piece.style.left = `${Math.random() * 100}%`;
+      piece.style.top = `${-Math.random() * 200}%`;
+      document.querySelector('.confetti').appendChild(piece);
+    }
+  </script>
+</body>
+</html>
